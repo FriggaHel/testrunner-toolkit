@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  saucectl-run: saucelabs/saucectl-run@1.0.0
+  saucectl: saucelabs/saucectl-run@1.0.0
 
 jobs:
   # Cypress Running in Docker Example
