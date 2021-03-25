@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - master
+      - update-workflow
     paths:
       - '!docs/**'
       - '!website/**'
