@@ -7,11 +7,7 @@ on:
   pull_request:
   push:
     branches:
-      - master
-      - update-workflow
-    paths:
-      - '!docs/**'
-      - '!website/**'
+      - '*'
 
 env:
   SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
