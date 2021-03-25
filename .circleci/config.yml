@@ -1,41 +1,26 @@
 version: 2.1
-jobs:
-  setup:
-    working_directory: ~/app
-    docker:
-      - image: circleci/node:10.12
-    steps:
-      - checkout
-      - run:
-          name: Download saucectl
-          command: |
-              SAUCECTL_VERSION=0.24.2
-              SAUCECTL_BINARY=saucectl_${SAUCECTL_VERSION}_linux_64-bit.tar.gz
-              curl -L -o ${SAUCECTL_BINARY} \
-                -H "Accept: application/octet-stream" \
-                https://github.com/saucelabs/saucectl/releases/download/v${SAUCECTL_VERSION}/${SAUCECTL_BINARY} \
-                && tar -xvzf ${SAUCECTL_BINARY}
-      - persist_to_workspace:
-          root: ~/app
-          paths:
-            - .
+orbs:
+  saucectl-run: saucelabs/saucectl-run@1.0.0
 
+jobs:
   # Cypress Running in Docker Example
   test-cypress-docker:
     working_directory: ~/app
-    docker:
-      - image: ubuntu:20.04
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - attach_workspace:
           at: ~/app
       - setup_remote_docker:
           version: 19.03.13
       - run:
-          name: Cypress Tests
+          name: Prepare Cypress tests
           command: |
             chmod -R 777 ./tests
             sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
-            ./saucectl run -c ./.sauce/cypress.yml
+      - saucectl/saucectl-run:
+          config-file: ./.sauce/cypress.yml
+          testing-environment: docker
           environment:
             BUILD_ID: $CIRCLE_BUILD_NUM
             BUILD_ENV: CircleCI
@@ -48,11 +33,13 @@ jobs:
       - attach_workspace:
           at: ~/app
       - run:
-          name: Cypress Tests
+          name: Prepare Cypress Tests
           command: |
             chmod -R 777 ./tests
             sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
-            ./saucectl run -c ./.sauce/cypress.yml
+      - saucectl/saucectl-run:
+          config-file: ./.sauce/cypress.yml
+          testing-environment: sauce
           environment:
             BUILD_ID: $CIRCLE_BUILD_NUM
             BUILD_ENV: CircleCI
@@ -65,11 +52,16 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/app
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
-          name: Playwright Tests
+          name: Prepare Playwright Tests
           command: |
             chmod -R 777 ./tests
-            ./saucectl run -c ./.sauce/playwright.yml
+            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
+      - saucectl/saucectl-run:
+          config-file: ./.sauce/playwright.yml
+          testing-environment: docker
           environment:
             SKIP_CI: true
             BUILD_ID: $CIRCLE_BUILD_NUM
@@ -83,11 +75,16 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/app
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
-          name: Puppeteer Tests
+          name: Prepare Puppeteer Tests
           command: |
             chmod -R 777 ./tests
-            ./saucectl run -c ./.sauce/puppeteer.yml
+            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
+      - saucectl/saucectl-run:
+          config-file: ./.sauce/puppeteer.yml
+          testing-environment: docker
           environment:
             SKIP_CI: true
             BUILD_ID: $CIRCLE_BUILD_NUM
@@ -102,10 +99,13 @@ jobs:
       - attach_workspace:
           at: ~/app
       - run:
-          name: Testcafe Tests
+          name: Prepare Testcafe Tests
           command: |
             chmod -R 777 ./tests
-            ./saucectl run -c ./.sauce/testcafe.yml
+            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
+      - saucectl/saucectl-run:
+          config-file: ./.sauce/testcafe.yml
+          testing-environment: docker
           environment:
             SKIP_CI: true
             BUILD_ID: $CIRCLE_BUILD_NUM
@@ -115,19 +115,8 @@ workflows:
   version: 2
   default_workflow:
     jobs:
-      - setup
-      - test-cypress-docker:
-          requires:
-            - setup
-      - test-cypress:
-          requires:
-            - setup
-      - test-playwright:
-          requires:
-            - setup
-      - test-puppeteer:
-          requires:
-            - setup
-      - test-testcafe:
-          requires:
-            - setup
+      - test-cypress-docker
+      - test-cypress
+      - test-playwright
+      - test-puppeteer
+      - test-testcafe

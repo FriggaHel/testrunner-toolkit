@@ -24,18 +24,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Download saucectl
-        run: |
-          SAUCECTL_BINARY=saucectl_${SAUCECTL_VERSION}_linux_64-bit.tar.gz
-          curl -L -o ${SAUCECTL_BINARY} \
-              -H "Accept: application/octet-stream" \
-              https://github.com/saucelabs/saucectl/releases/download/v${SAUCECTL_VERSION}/${SAUCECTL_BINARY} \
-              && tar -xvzf ${SAUCECTL_BINARY}
       - name: Workaround for container permissions
         run: sudo chmod -R 777 tests/
-      - name: Run Sauce Pipeline Test
-        run: |
-          ./saucectl run -c ./.sauce/puppeteer.yml
+      - uses: saucelabs/saucectl-run-action@v1
+        with:
+          saucectl-version: v${{ env.SAUCECTL_VERSION }}
+          config-file: ./.sauce/puppeteer.yml
+          testing-env: docker
         env:
           SKIP_CI: true
           BUILD_ID: ${{ github.run_id }}
@@ -47,19 +42,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Download saucectl
-        run: |
-          SAUCECTL_BINARY=saucectl_${SAUCECTL_VERSION}_linux_64-bit.tar.gz
-          curl -L -o ${SAUCECTL_BINARY} \
-              -H "Accept: application/octet-stream" \
-              https://github.com/saucelabs/saucectl/releases/download/v${SAUCECTL_VERSION}/${SAUCECTL_BINARY} \
-              && tar -xvzf ${SAUCECTL_BINARY}
       - name: Workaround for container permissions
         run: sudo chmod -R 777 tests/
- 
-      - name: Run Sauce Pipeline Test
-        run: |
-          ./saucectl run -c ./.sauce/playwright.yml
+      - uses: saucelabs/saucectl-run-action@v1
+        with:
+          saucectl-version: v${{ env.SAUCECTL_VERSION }}
+          config-file: ./.sauce/playwright.yml
+          testing-env: docker
         env:
           SKIP_CI: true
           BUILD_ID: ${{ github.run_id }}
@@ -71,18 +60,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Download saucectl
-        run: |
-          SAUCECTL_BINARY=saucectl_${SAUCECTL_VERSION}_linux_64-bit.tar.gz
-          curl -L -o ${SAUCECTL_BINARY} \
-              -H "Accept: application/octet-stream" \
-              https://github.com/saucelabs/saucectl/releases/download/v${SAUCECTL_VERSION}/${SAUCECTL_BINARY} \
-              && tar -xvzf ${SAUCECTL_BINARY}
       - name: Workaround for container permissions
         run: sudo chmod -R 777 tests/
-      - name: Run Sauce Pipeline Test
-        run: |
-          ./saucectl run -c ./.sauce/testcafe.yml --verbose
+      - uses: saucelabs/saucectl-run-action@v1
+        with:
+          saucectl-version: v${{ env.SAUCECTL_VERSION }}
+          config-file: ./.sauce/testcafe.yml
+          testing-env: docker
         env:
           SKIP_CI: true
           BUILD_ID: ${{ github.run_id }}
@@ -94,18 +78,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Download saucectl
-        run: |
-          SAUCECTL_BINARY=saucectl_${SAUCECTL_VERSION}_linux_64-bit.tar.gz
-          curl -L -o ${SAUCECTL_BINARY} \
-              -H "Accept: application/octet-stream" \
-              https://github.com/saucelabs/saucectl/releases/download/v${SAUCECTL_VERSION}/${SAUCECTL_BINARY} \
-              && tar -xvzf ${SAUCECTL_BINARY}
       - name: Workaround for container permissions
         run: sudo chmod -R 777 tests/
-      - name: Run Sauce Pipeline Test
-        run: |
-          ./saucectl run -c ./.sauce/cypress.yml
+      - uses: saucelabs/saucectl-run-action@v1
+        with:
+          saucectl-version: v${{ env.SAUCECTL_VERSION }}
+          config-file: ./.sauce/cypress.yml
+          testing-env: docker
         env:
           BUILD_ID: ${{ github.run_id }}
           BUILD_ENV: GitHub Actions
