@@ -27,7 +27,7 @@ jobs:
         with:
           saucectl-version: v${{ env.SAUCECTL_VERSION }}
           config-file: ./.sauce/puppeteer.yml
-          testing-env: docker
+          testing-environment: docker
         env:
           SKIP_CI: true
           BUILD_ID: ${{ github.run_id }}
@@ -45,7 +45,7 @@ jobs:
         with:
           saucectl-version: v${{ env.SAUCECTL_VERSION }}
           config-file: ./.sauce/playwright.yml
-          testing-env: docker
+          testing-environment: docker
         env:
           SKIP_CI: true
           BUILD_ID: ${{ github.run_id }}
@@ -63,7 +63,7 @@ jobs:
         with:
           saucectl-version: v${{ env.SAUCECTL_VERSION }}
           config-file: ./.sauce/testcafe.yml
-          testing-env: docker
+          testing-environment: docker
         env:
           SKIP_CI: true
           BUILD_ID: ${{ github.run_id }}
@@ -81,7 +81,7 @@ jobs:
         with:
           saucectl-version: v${{ env.SAUCECTL_VERSION }}
           config-file: ./.sauce/cypress.yml
-          testing-env: docker
+          testing-environment: docker
         env:
           BUILD_ID: ${{ github.run_id }}
           BUILD_ENV: GitHub Actions
