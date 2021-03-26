@@ -89,6 +89,8 @@ jobs:
       BUILD_ENV: CircleCI
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           name: Prepare Testcafe Tests
           command: |
