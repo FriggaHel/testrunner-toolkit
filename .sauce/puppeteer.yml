@@ -14,6 +14,14 @@ sauce:
 # Every file defined in this list will be bundled into a zip and
 # uploaded to Sauce Labs.
 rootDir: ./
+docker:
+  # fileTransfer controls how test files are transferred to the docker container before tests are run (choice: mount|copy).
+  # `mount` will mount files and folders into the container. Changes to these files and folders will be reflected on the
+  # host as well (and vice versa). However, you may run into permission issues depending on your docker or host settings.
+  # In this case the usage of `copy` is advised. `copy` will simply copy files and folders into the container.
+  fileTransfer: mount # Defaults to `mount`. Choose between mount|copy.
+  # image controls which images to be used for local testing. Change this value is you want to use a custom image.
+  # image: saucelabs/stt-puppeeteer-node:v0.3.0
 puppeteer:
   version: 3.0.4
 suites:
