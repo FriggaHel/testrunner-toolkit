@@ -20,7 +20,7 @@ docker:
   # host as well (and vice versa). However, you may run into permission issues depending on your docker or host settings.
   # In this case the usage of `copy` is advised. `copy` will simply copy files and folders into the container.
   # Defaults to `mount`. Choose between mount|copy.
-  fileTransfer: mount
+  fileTransfer: copy
   # image controls which images to be used for local testing. Change this value is you want to use a custom image.
   # image: saucelabs/stt-cypress-mocha-node:v5.6.0
 cypress:
