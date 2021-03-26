@@ -12,7 +12,6 @@ on:
 env:
   SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
   SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
-  SAUCECTL_VERSION: 0.34.0
 
 jobs:
   puppeteer:
@@ -25,7 +24,6 @@ jobs:
         run: sudo chmod -R 777 tests/
       - uses: saucelabs/saucectl-run-action@v1
         with:
-          saucectl-version: v${{ env.SAUCECTL_VERSION }}
           configuration-file: ./.sauce/puppeteer.yml
           testing-environment: docker
           environment: docker
@@ -44,7 +42,6 @@ jobs:
         run: sudo chmod -R 777 tests/
       - uses: saucelabs/saucectl-run-action@v1
         with:
-          saucectl-version: v${{ env.SAUCECTL_VERSION }}
           configuration-file: ./.sauce/playwright.yml
           testing-environment: docker
           environment: docker
@@ -63,7 +60,6 @@ jobs:
         run: sudo chmod -R 777 tests/
       - uses: saucelabs/saucectl-run-action@v1
         with:
-          saucectl-version: v${{ env.SAUCECTL_VERSION }}
           configuration-file: ./.sauce/testcafe.yml
           testing-environment: docker
           environment: docker
@@ -82,7 +78,6 @@ jobs:
         run: sudo chmod -R 777 tests/
       - uses: saucelabs/saucectl-run-action@v1
         with:
-          saucectl-version: v${{ env.SAUCECTL_VERSION }}
           configuration-file: ./.sauce/cypress.yml
           testing-environment: docker
           environment: docker
