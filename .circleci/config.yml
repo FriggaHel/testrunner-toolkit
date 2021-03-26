@@ -8,6 +8,9 @@ jobs:
     working_directory: ~/app
     machine:
       image: ubuntu-2004:202010-01
+    environment:
+      BUILD_ID: $CIRCLE_BUILD_NUM
+      BUILD_ENV: CircleCI
     steps:
       - attach_workspace:
           at: ~/app
@@ -21,14 +24,14 @@ jobs:
       - saucectl/saucectl-run:
           config-file: ./.sauce/cypress.yml
           testing-environment: docker
-          environment:
-            BUILD_ID: $CIRCLE_BUILD_NUM
-            BUILD_ENV: CircleCI
 
   test-cypress:
     working_directory: ~/app
     machine:
       image: ubuntu-2004:202010-01
+    environment:
+      BUILD_ID: $CIRCLE_BUILD_NUM
+      BUILD_ENV: CircleCI
     steps:
       - attach_workspace:
           at: ~/app
@@ -40,15 +43,15 @@ jobs:
       - saucectl/saucectl-run:
           config-file: ./.sauce/cypress.yml
           testing-environment: sauce
-          environment:
-            BUILD_ID: $CIRCLE_BUILD_NUM
-            BUILD_ENV: CircleCI
 
   # Playwright Example
   test-playwright:
     working_directory: ~/app
     machine:
       image: ubuntu-2004:202010-01
+    environment:
+      BUILD_ID: $CIRCLE_BUILD_NUM
+      BUILD_ENV: CircleCI
     steps:
       - attach_workspace:
           at: ~/app
@@ -62,16 +65,15 @@ jobs:
       - saucectl/saucectl-run:
           config-file: ./.sauce/playwright.yml
           testing-environment: docker
-          environment:
-            SKIP_CI: true
-            BUILD_ID: $CIRCLE_BUILD_NUM
-            BUILD_ENV: CircleCI
 
   # Puppeteer Example
   test-puppeteer:
     working_directory: ~/app
     machine:
       image: ubuntu-2004:202010-01
+    environment:
+      BUILD_ID: $CIRCLE_BUILD_NUM
+      BUILD_ENV: CircleCI
     steps:
       - attach_workspace:
           at: ~/app
@@ -85,16 +87,15 @@ jobs:
       - saucectl/saucectl-run:
           config-file: ./.sauce/puppeteer.yml
           testing-environment: docker
-          environment:
-            SKIP_CI: true
-            BUILD_ID: $CIRCLE_BUILD_NUM
-            BUILD_ENV: CircleCI
 
   # Testcafe Example
   test-testcafe:
     working_directory: ~/app
     machine:
       image: ubuntu-2004:202010-01
+    environment:
+      BUILD_ID: $CIRCLE_BUILD_NUM
+      BUILD_ENV: CircleCI
     steps:
       - attach_workspace:
           at: ~/app
@@ -106,10 +107,6 @@ jobs:
       - saucectl/saucectl-run:
           config-file: ./.sauce/testcafe.yml
           testing-environment: docker
-          environment:
-            SKIP_CI: true
-            BUILD_ID: $CIRCLE_BUILD_NUM
-            BUILD_ENV: CircleCI
 
 workflows:
   version: 2
