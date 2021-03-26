@@ -28,7 +28,6 @@ suites:
       hello: world
     speed: 1
 
-rootDir: tests/testcafe/
 docker:
   # fileTransfer controls how test files are transferred to the docker container before tests are run (choice: mount|copy).
   # `mount` will mount files and folders into the container. Changes to these files and folders will be reflected on the
@@ -40,4 +39,5 @@ docker:
   # image: saucelabs/stt-testcafe-node:v0.5.0
 
 testcafe:
+  projectPath: tests/testcafe/
   version: 1.11.0
