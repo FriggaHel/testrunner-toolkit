@@ -25,7 +25,7 @@ docker:
   # image: saucelabs/stt-cypress-mocha-node:v5.6.0
 rootDir: tests/
 cypress:
-  configFile: "cypress.json"  # We determine related files based on the location of the config file.
+  configFile: "tests/cypress.json"  # We determine related files based on the location of the config file.
   version: 5.6.0
 suites:
   - name: "saucy test"
