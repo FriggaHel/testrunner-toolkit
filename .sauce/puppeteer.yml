@@ -23,7 +23,6 @@ docker:
   fileTransfer: mount
   # image controls which images to be used for local testing. Change this value is you want to use a custom image.
   # image: saucelabs/stt-puppeeteer-node:v0.3.0
-rootDir: tests/puppeteer/
 puppeteer:
   version: 3.0.4
 suites:

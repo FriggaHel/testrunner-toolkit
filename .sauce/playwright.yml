@@ -22,9 +22,8 @@ docker:
   fileTransfer: mount
   # image controls which images to be used for local testing. Change this value is you want to use a custom image.
   # image: saucelabs/stt-playwright-jest-node:v1.7.1
-rootDir: tests/playwright/
 playwright:
-  projectPath: .
+  projectPath: tests/playwright/
   version: 1.7.1
   params:
     browserName: firefox

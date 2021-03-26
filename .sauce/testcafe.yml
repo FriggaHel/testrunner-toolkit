@@ -37,7 +37,7 @@ docker:
   fileTransfer: mount
   # image controls which images to be used for local testing. Change this value is you want to use a custom image.
   # image: saucelabs/stt-testcafe-node:v0.5.0
-rootDir: ./tests/testcafe/
+
 testcafe:
-  projectPath: .
+  projectPath: tests/testcafe/
   version: 1.11.0
