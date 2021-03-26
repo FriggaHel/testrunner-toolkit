@@ -85,7 +85,7 @@ jobs:
           saucectl-version: v${{ env.SAUCECTL_VERSION }}
           configuration-file: ./.sauce/cypress.yml
           testing-environment: docker
-            environment: docker
+          environment: docker
         env:
           BUILD_ID: ${{ github.run_id }}
           BUILD_ENV: GitHub Actions
