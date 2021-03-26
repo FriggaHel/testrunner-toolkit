@@ -55,7 +55,7 @@ jobs:
           name: Prepare Playwright Tests
           command: |
             chmod -R 777 ./tests
-            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
+            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/playwright.yml
       - saucectl/saucectl-run:
           config-file: ./.sauce/playwright.yml
           testing-environment: docker
@@ -75,7 +75,7 @@ jobs:
           name: Prepare Puppeteer Tests
           command: |
             chmod -R 777 ./tests
-            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
+            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/puppeteer.yml
       - saucectl/saucectl-run:
           config-file: ./.sauce/puppeteer.yml
           testing-environment: docker
@@ -95,7 +95,7 @@ jobs:
           name: Prepare Testcafe Tests
           command: |
             chmod -R 777 ./tests
-            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/cypress.yml
+            sed -i 's/fileTransfer: mount/fileTransfer: copy/g' ./.sauce/testcafe.yml
       - saucectl/saucectl-run:
           config-file: ./.sauce/testcafe.yml
           testing-environment: docker
