@@ -12,8 +12,7 @@ jobs:
       BUILD_ID: $CIRCLE_BUILD_NUM
       BUILD_ENV: CircleCI
     steps:
-      - attach_workspace:
-          at: ~/app
+      - checkout
       - setup_remote_docker:
           version: 19.03.13
       - run:
@@ -33,8 +32,7 @@ jobs:
       BUILD_ID: $CIRCLE_BUILD_NUM
       BUILD_ENV: CircleCI
     steps:
-      - attach_workspace:
-          at: ~/app
+      - checkout
       - run:
           name: Prepare Cypress Tests
           command: |
@@ -53,8 +51,7 @@ jobs:
       BUILD_ID: $CIRCLE_BUILD_NUM
       BUILD_ENV: CircleCI
     steps:
-      - attach_workspace:
-          at: ~/app
+      - checkout
       - setup_remote_docker:
           version: 19.03.13
       - run:
@@ -75,8 +72,7 @@ jobs:
       BUILD_ID: $CIRCLE_BUILD_NUM
       BUILD_ENV: CircleCI
     steps:
-      - attach_workspace:
-          at: ~/app
+      - checkout
       - setup_remote_docker:
           version: 19.03.13
       - run:
@@ -97,8 +93,7 @@ jobs:
       BUILD_ID: $CIRCLE_BUILD_NUM
       BUILD_ENV: CircleCI
     steps:
-      - attach_workspace:
-          at: ~/app
+      - checkout
       - run:
           name: Prepare Testcafe Tests
           command: |
